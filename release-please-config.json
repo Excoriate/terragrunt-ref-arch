@@ -1,0 +1,71 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "packages": {
+    ".": {
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
+      "changelog-path": "CHANGELOG.md",
+      "changelog-sections": [
+        {
+          "section": "Features",
+          "type": "feat"
+        },
+        {
+          "section": "Bug Fixes",
+          "type": "fix"
+        },
+        {
+          "section": "Other",
+          "type": "chore"
+        },
+        {
+          "section": "Docs",
+          "type": "docs"
+        },
+        {
+          "section": "Performance",
+          "type": "perf"
+        },
+        {
+          "hidden": true,
+          "section": "Build",
+          "type": "build"
+        },
+        {
+          "section": "Dependency Updates",
+          "type": "deps"
+        },
+        {
+          "hidden": true,
+          "section": "CI",
+          "type": "ci"
+        },
+        {
+          "section": "Refactoring",
+          "type": "refactor"
+        },
+        {
+          "hidden": true,
+          "section": "Reverts",
+          "type": "revert"
+        },
+        {
+          "hidden": true,
+          "section": "Styling",
+          "type": "style"
+        },
+        {
+          "hidden": true,
+          "section": "Tests",
+          "type": "test"
+        }
+      ],
+      "draft": false,
+      "extra-files": [
+        "README.md"
+      ],
+      "prerelease": false,
+      "release-type": "terraform-module"
+    }
+  }
+}

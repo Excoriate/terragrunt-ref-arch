@@ -1,0 +1,32 @@
+---
+name: Check Markdown links
+on:
+    workflow_dispatch:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches: [main]
+jobs:
+    markdown-link-check-on-pull-request:
+        if: github.event_name == 'pull_request'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: technote-space/get-diff-action@v6
+              with:
+                  PATTERNS: |
+                      **/**.md
+            - uses: gaurav-nelson/github-action-markdown-link-check@v1
+              with:
+                  check-modified-files-only: yes
+                  config-file: .md-link-check.json
+              if: env.GIT_DIFF
+    markdown-link-check-on-push-or-workflow_dispatch:
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: gaurav-nelson/github-action-markdown-link-check@v1
+              with:
+                  config-file: .markdown-link-check.json

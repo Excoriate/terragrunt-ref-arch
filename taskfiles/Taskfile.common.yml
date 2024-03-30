@@ -1,0 +1,67 @@
+---
+version: '3'
+
+env:
+
+tasks:
+    clean:
+        desc: Clean all the .terraform directories and associated files
+        cmds:
+            - |
+              if [ -d ".terraform" ]; then
+                echo "Cleaning up .terraform directories:"
+                find . -type d -name ".terraform" -maxdepth 1 -exec echo "Removing {}" \; -exec rm -rf {} \;
+              else
+                echo "No .terraform directories found, skipping cleanup."
+              fi
+      # .terragrunt-cache directories
+            - |
+              if [ -d ".terragrunt-cache" ]; then
+                echo "Cleaning up .terragrunt-cache directories:"
+                find . -type d -name ".terragrunt-cache" -maxdepth 1 -exec echo "Removing {}" \; -exec rm -rf {} \;
+              else
+                echo "No .terragrunt-cache directories found, skipping cleanup."
+              fi
+      # terraform.tfstate files
+            - |
+              if [ -f "terraform.tfstate" ]; then
+                echo "Removing terraform.tfstate files:"
+                find . -type f -name "terraform.tfstate" -maxdepth 1 -exec echo "Removing {}" \; -exec rm -rf {} \;
+              else
+                echo "No terraform.tfstate files found, skipping removal."
+              fi
+      # terraform.tfstate.backup files
+            - |
+              if [ -f "terraform.tfstate.backup" ]; then
+                echo "Removing terraform.tfstate.backup files:"
+                find . -type f -name "terraform.tfstate.backup" -maxdepth 1 -exec echo "Removing {}" \; -exec rm -rf {} \;
+              else
+                echo "No terraform.tfstate.backup files found, skipping removal."
+              fi
+      # terraform.tfplan files
+            - |
+              if [ -f "terraform.tfplan" ]; then
+                echo "Removing terraform.tfplan files:"
+                find . -type f -name "terraform.tfplan" -maxdepth 1 -exec echo "Removing {}" \; -exec rm -rf {} \;
+              else
+                echo "No terraform.tfplan files found, skipping removal."
+              fi
+
+    prune:
+        desc: Clean all the untracked files in the repository with some exclusions (!YOU LOOSE UNTRACKED FILE)
+        cmds:
+            - task: clean
+            - git clean -f -xd --exclude=".idea" --exclude=".env" --exclude="*.tfvars" --exclude="backend.hcl" --exclude="backend.tf" --exclude="Taskfile.yml"
+    default:
+        desc: Default task / Help
+        cmds:
+            - |
+              cat <<-EOT
+                # Running the tasks from your Taskfile.yml
+                #
+                # Task it's a modern replacement for Makefile to simplify the repetitive actions
+                # More information on taskfile and the capabilities here: https://taskfile.dev/
+                #
+                # Use task --list to see the available task, and --summary to see more info about a specific task
+              EOT
+        silent: true

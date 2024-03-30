@@ -1,0 +1,29 @@
+---
+ci/cd:
+    - .github/workflows/*
+infrastructure:
+    - terraform/**
+    - infra/**
+    - modules/**
+    - terragrunt/**
+documentation:
+    - README.md
+    - .github/ISSUE_TEMPLATE/*
+    - ./*.md
+patch:
+    - TaskFile.yml
+    - LICENSE
+    - .github/labeler.yml
+    - .yamllint.yml
+    - .Makefile
+    - .pre-commit-config.yaml
+    - .goreleaser.yml
+    - .github/settings.yml
+    - .github/dependabot.yml
+    - .gitignore
+    - .gitattributes
+    - .shellcheckrc
+    - .editorconfig
+    - .dockerignore
+minor:
+    - pkg/*

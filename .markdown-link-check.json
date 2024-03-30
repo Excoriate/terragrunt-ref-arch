@@ -1,0 +1,29 @@
+{
+  "aliveStatusCodes": [
+    200,
+    206,
+    999,
+    400
+  ],
+  "fallbackRetryDelay": "30s",
+  "ignorePatterns": [
+    {
+      "pattern": "^#"
+    },
+    {
+      "pattern": "^Taskfile.yml"
+    },
+    {
+      "pattern": "^.github/workflows/"
+    },
+    {
+      "pattern": "^docs/templates/"
+    },
+    {
+      "pattern": "CHANGELOG.md"
+    }
+  ],
+  "retryCount": 5,
+  "retryOn429": true,
+  "timeout": "20s"
+}

@@ -1,0 +1,19 @@
+---
+version: '3'
+
+env:
+
+tasks:
+    hooks-init:
+        desc: Initialize pre-commit
+        cmds:
+            - pre-commit install --hook-type pre-commit
+            - pre-commit install --hook-type pre-push
+            - pre-commit install --hook-type commit-msg
+            - pre-commit autoupdate
+    hooks-run:
+        desc: Run pre-commit
+        cmds:
+            - |
+              pre-commit run --show-diff-on-failure \
+              --color always --all-files {{.CLI_ARGS}}

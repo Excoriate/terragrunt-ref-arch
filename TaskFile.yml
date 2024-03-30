@@ -1,0 +1,116 @@
+---
+version: '3'
+env:
+    ENV: '{{.ENV}}'
+    stack: '{{default "makemyinfra.cloud" .stack}}'
+
+vars:
+    tgdir: '{{default "infra/terraform/live" .tgdir}}'
+    tgmod: '{{default "" .tgmod}}'
+    env: '{{default "prod" .env}}'
+    region: '{{default "global" .region}}'
+    TERRAFORM_MODULES_DIR: '{{default "infra/terraform/modules" .TERRAFORM_MODULES_DIR}}'
+
+dotenv: [.env, .env.terragrunt, '.env.{{.ENV}}.aws', '.env.{{.ENV}}.cloudflare', '.env.stack.{{.stack}}', '.env.{{.ENV}}']
+
+includes:
+    common:
+        taskfile: ./taskfiles/taskfile.common.yml
+    precommit:
+        taskfile: ./taskfiles/taskfile.precommit.yml
+    tg:
+        taskfile: ./taskfiles/taskfile.terragrunt.yml
+tasks:
+    default:
+        cmds:
+            - task: common:default
+
+    pc-init:
+        desc: Initialize and install required hooks
+        cmds:
+            - task: precommit:hooks-init
+
+    pc-run:
+        desc: Run all the hooks described in the .pre-commit-config.yaml file
+        cmds:
+            - task: precommit:hooks-run
+    tg-init:
+        desc: 'In the infra directory, initialize the terraform modules, for example: `task infra-init tgmod=cloudflare-zone`'
+        summary: |
+            Initializes a specific Terraform module within the infrastructure directory.
+
+            Variables:
+              - tgmod: Specifies the module to be initialized.
+              - stack: The stack name to use (default is "makemyinfra").
+              - env: Environment to target (default is "prod").
+              - region: AWS region for the Terraform provider (default is "global").
+
+            Example:
+              task tg-init tgmod=cloudflare-zone
+        cmds:
+            - task: common:clean
+            - task: tg:init
+              vars: {TF_WORKING_DIR: '{{.tgdir}}/{{.stack}}/{{.env}}/{{.region}}/{{.tgmod}}'}
+              env: {TG_STACK_NAME: '{{.stack}}'}
+
+    infra-ci:
+        desc: 'In the infra directory, execute a terraform plan, for example: `task infra-plan tgmod=cloudflare-zone`'
+        summary: |
+            Executes a Terraform plan for a specified module, highlighting changes without applying them.
+
+            Variables:
+              - tgmod: The module to plan.
+              - stack: The stack name to use (default is "makemyinfra").
+              - env: Environment to target (default is "prod").
+              - region: AWS region for the Terraform provider (default is "global").
+
+            Example:
+              task infra-ci tgmod=cloudflare-zone env=prod
+
+
+        cmds:
+            - task: common:clean
+            - task: tg:lint
+              vars: {TF_WORKING_DIR: '{{.tgdir}}/{{.stack}}/{{.env}}/{{.region}}/{{.tgmod}}'}
+              env: {TG_STACK_NAME: '{{.stack}}'}
+            - task: tg:plan
+              vars: {TF_WORKING_DIR: '{{.tgdir}}/{{.stack}}/{{.env}}/{{.region}}/{{.tgmod}}'}
+              env: {TG_STACK_NAME: '{{.stack}}'}
+    infra-apply:
+        summary: |
+            Applies Terraform changes for the specified module, modifying infrastructure according to the plan.
+
+            Variables:
+              - tgmod: The module to apply changes to.
+              - stack: The stack name to use (default is "makemyinfra").
+              - env: Environment to target (default is "prod").
+              - region: AWS region for the Terraform provider (default is "global").
+
+            Example:
+              task infra-apply tgmod=cloudflare-email-verification env=prod
+        cmds:
+            - task: common:clean
+            - task: tg:plan
+              vars: {TF_WORKING_DIR: '{{.tgdir}}/{{.stack}}/{{.env}}/{{.region}}/{{.tgmod}}'}
+            - task: tg:apply
+              vars: {TF_WORKING_DIR: '{{.tgdir}}/{{.stack}}/{{.env}}/{{.region}}/{{.tgmod}}'}
+
+    infra-destroy:
+        desc: 'In the infra directory, execute a terragrunt destroy, for example: `task infra-destroy tgmod=cloudflare-zone`'
+        summary: |
+            Destroys Terraform-managed infrastructure for a specified module.
+
+            Variables:
+              - tgmod: The module whose infrastructure is to be destroyed.
+              - stack: The stack name to use (default is "makemyinfra").
+              - env: Environment to target (default is "prod").
+              - region: AWS region for the Terraform provider (default is "global").
+
+            Example:
+              task infra-destroy tgmod=cloudflare-email-verification env=prod        cmds:
+        cmds:
+            - task: common:clean
+            - task: tg:plan
+              vars: {TF_WORKING_DIR: '{{.tgdir}}/{{.stack}}/{{.env}}/{{.region}}/{{.tgmod}}'}
+            - task: tg:destroy
+              vars: {TF_WORKING_DIR: '{{.tgdir}}/{{.stack}}/{{.env}}/{{.region}}/{{.tgmod}}'}

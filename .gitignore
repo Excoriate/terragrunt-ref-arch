@@ -1,0 +1,46 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+*.out.tmp
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+# Specific binaries
+**/bin/
+**/bin/go
+
+.vscode.scannerwork
+.scannerwork
+.idea
+
+# Dev builds
+**/build/
+**/dist/
+
+.idea/
+.vscode/
+
+# Ignore related terraform, and terragrunt files
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfplan.*
+**/.terraform/
+**/.terragrunt-cache/
+.terraform/
+
+# Ignore all .env files
+#/.env.terragrunt
+
+# Ignore terragrunt generated files.
+backend.tf
+providers.tf

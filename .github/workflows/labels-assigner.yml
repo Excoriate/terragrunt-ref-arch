@@ -1,0 +1,31 @@
+---
+name: Assign labels on PR
+on:
+    pull_request:
+        types: [opened, labeled, unlabeled, synchronize]
+defaults:
+    run:
+        shell: bash
+jobs:
+    triage:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/labeler@v3
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+    size-label:
+        runs-on: ubuntu-latest
+        steps:
+            - name: size-label
+              uses: pascalgn/size-label-action@v0.4.3
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  sizes: >
+                      {
+                        "0": "XS",
+                        "15": "S",
+                        "30": "M",
+                        "50": "L",
+                        "250": "Too Large"
+                      }

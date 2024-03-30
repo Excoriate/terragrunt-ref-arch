@@ -1,0 +1,30 @@
+---
+version: '3'
+env:
+tasks:
+    gen-env-aws:
+        desc: >
+            Generate a new .env file for a local AWS configuration, configured with AWS credentials stored in a ~/.aws/credentials file
+
+        cmds:
+            - ./DevEx/scripts/env/generate-env-example.sh
+    gen-env-terraform:
+        desc: >
+            Generate a new .env file for a local Terraform configuration, configured with AWS credentials stored in a ~/.aws/credentials file
+
+        cmds:
+            - ./DevEx/scripts/env/generate-env-terraform.sh
+    default:
+        desc: Default task / Help
+        cmds:
+            - |
+              cat <<-EOT
+                # Running the tasks from your Taskfile.yml
+                #
+                # Task it's a modern replacement for Makefile to simplify the repetitive actions
+                # More information on taskfile and the capabilities here: https://taskfile.dev/
+                #
+                # Use task --list to see the available task, and --summary to see more
+                # info about a specific task
+              EOT
+        silent: true

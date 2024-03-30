@@ -1,7 +1,7 @@
 ---
 repository:
-    name: infra-landing-zone
-    description: Landing zone for makemyinfra.cloud and other stuffs
+    name: terragrunt-ref-arch
+    description: Highly scalable and available reference architecture for Terragrunt.
     topics: example, devops, tooling, ecs, sre, cli
     default_branch: main
     allow_squash_merge: true

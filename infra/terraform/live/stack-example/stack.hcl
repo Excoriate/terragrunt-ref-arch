@@ -1,8 +1,8 @@
 locals {
-  name = "makemyinfra"
-  domain = "makemyinfra.cloud"
+  name = "example"
+  domain = "example.com"
 
   tags = {
-    Stack = "makemyinfra.cloud"
+    Stack = "example.com"
   }
 }

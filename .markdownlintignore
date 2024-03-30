@@ -1,9 +1,10 @@
 .github/PULL_REQUEST_TEMPLATE.md
 docs/contribution_guidelines.md
-docs/contribution_guidelines.md
-docs/contribution_guidelines.md
 .github/ISSUE_TEMPLATE/**.md
 CONTRIBUTING.md
 modules/**/README.md
 examples/**/**/README.md
 CHANGELOG.md
+# Add these lines to ignore specific README.md files for MD025
+infra/terraform/live/_modules/README.md
+infra/terraform/live/_providers/README.md

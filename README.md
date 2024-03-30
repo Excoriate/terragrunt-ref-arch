@@ -97,6 +97,9 @@ For more details on how to use Terragrunt and Terraform effectively within this 
 - [Terragrunt Documentation](https://terragrunt.gruntwork.io/docs/)
 - [Terraform Documentation](https://www.terraform.io/docs/)
 
+
+>**NOTE**: Each layer of this architecture has its own README file with detailed explanations and examples.
+
 ## Contributing 🤝
 
 Contributions are welcome! If you have improvements or fixes, please open a pull request. For major changes or new features, please open an issue first to discuss what you would like to change.

@@ -174,7 +174,7 @@ generate "terraform_version" {
   if_exists         = "overwrite"
   disable_signature = true
 
-  contents = <<EOF
+  contents = <<-EOF
     ${local.tf_version_cfg.locals.terraform_version}
   EOF
 }
@@ -184,7 +184,7 @@ generate "terragrunt_version" {
   if_exists         = "overwrite"
   disable_signature = true
 
-  contents = <<EOF
+  contents = <<-EOF
     ${local.tf_version_cfg.locals.terragrunt_version}
   EOF
 }

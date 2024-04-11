@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.3](https://github.com/Excoriate/terragrunt-ref-arch/compare/v0.0.2...v0.0.3) (2024-04-03)
+
+
+### Bug Fixes
+
+* removed extra identation for generated files .terraform-version and .terragrunt-version. ([#2](https://github.com/Excoriate/terragrunt-ref-arch/issues/2)) ([3a3dc6f](https://github.com/Excoriate/terragrunt-ref-arch/commit/3a3dc6f2462e3a13ce8bd9af208259b3da92add0))
+
 ## [0.0.2](https://github.com/Excoriate/terragrunt-ref-arch/compare/v0.0.1...v0.0.2) (2024-03-30)
 
 

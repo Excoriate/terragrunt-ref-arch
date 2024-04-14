@@ -69,3 +69,6 @@ generate "providers" {
   contents  = join("\n", local.providers_cfg.locals.providers_content)
 }
 ```
+This configuration is then utilized in the terragrunt.hcl file to ensure that each child configuration inherits the provider settings, maintaining consistency across all deployments.
+
+It's important to notice that if the provider is defined in this layer (**global**), it's going to be inherited by all the child modules. If you want to **specify a provider that is LOCAL** to a specific module, you should define it in the file `providers.hcl` file of that module, which has exactly the same structure.

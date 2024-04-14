@@ -1,29 +1,48 @@
----
+# Add 'root' label to any root file changes
+# Quotation marks are required for the leading asterisk
+root:
+  - changed-files:
+      - any-glob-to-any-file: '*'
+
+# Add 'AnyChange' label to any changes within the entire repository
+AnyChange:
+  - changed-files:
+      - any-glob-to-any-file: '**'
+
+# Add 'Documentation' label to any file changes within 'docs' or 'guides' folders
+Documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/*
+          - guides/*
+          - README.md
+          - .github/ISSUE_TEMPLATE/*
+          - ./*.md
+# Add 'feature' label to any PR where the head branch name starts with `feature` or has a `feature` section in the name
+feature:
+  - head-branch: ['^feature', 'feature', 'feature/', '/feat']
+
+# Add 'release' label to any PR that is opened against the `main` branch
+release:
+  - base-branch: 'main'
+
+# Add Infrastructure label to any changes within the 'terraform' folder or any subfolders
+Infrastructure:
+  - changed-files:
+      - any-glob-to-any-file: ['terraform/**', 'infra/**', 'modules/**', 'terragrunt/**']
+
+# Add 'ci/cd' label to any changes within the '.github/workflows' folder
 ci/cd:
-    - .github/workflows/*
-infrastructure:
-    - terraform/**
-    - infra/**
-    - modules/**
-    - terragrunt/**
-documentation:
-    - README.md
-    - .github/ISSUE_TEMPLATE/*
-    - ./*.md
+  - changed-files:
+      - any-glob-to-any-file: '.github/workflows/*'
+
+# Add 'patch' label to any changes within the 'TaskFile.yml' file or any other root files
 patch:
-    - TaskFile.yml
-    - LICENSE
-    - .github/labeler.yml
-    - .yamllint.yml
-    - .Makefile
-    - .pre-commit-config.yaml
-    - .goreleaser.yml
-    - .github/settings.yml
-    - .github/dependabot.yml
-    - .gitignore
-    - .gitattributes
-    - .shellcheckrc
-    - .editorconfig
-    - .dockerignore
-minor:
-    - pkg/*
+  - changed-files:
+      - any-glob-to-any-file: ['TaskFile.yml', 'LICENSE', '.github/labeler.yml', '.yamllint.yml', '.Makefile', '.pre-commit-config.yaml', '.goreleaser.yml', '.github/settings.yml', '.github/dependabot.yml', '.gitignore', '.gitattributes', '.shellcheckrc', '.editorconfig', '.dockerignore']
+
+# Add 'breaking-change' label to any PR that modifies a file with a commit message containing 'BREAKING CHANGE', or modify the terragrunt.hcl file
+breaking-change:
+    - commit-message: 'BREAKING CHANGE'
+    - changed-files:
+        - any-glob-to-any-file: 'terragrunt.hcl'

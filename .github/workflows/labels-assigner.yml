@@ -6,6 +6,10 @@ on:
 defaults:
     run:
         shell: bash
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
     triage:
         runs-on: ubuntu-latest

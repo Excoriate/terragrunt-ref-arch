@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/Excoriate/terragrunt-ref-arch/compare/v0.0.3...v0.0.4) (2024-04-14)
+
+
+### Features
+
+* Update labeler.yml with new labels and criteria for better categorization. ([#7](https://github.com/Excoriate/terragrunt-ref-arch/issues/7)) ([ebc8d54](https://github.com/Excoriate/terragrunt-ref-arch/commit/ebc8d54fa262599996427444dc32aed0b6f32c93))
+
 ## [0.0.3](https://github.com/Excoriate/terragrunt-ref-arch/compare/v0.0.2...v0.0.3) (2024-04-03)
 
 

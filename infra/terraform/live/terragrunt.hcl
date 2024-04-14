@@ -37,6 +37,7 @@ locals {
   #│           │   │       │   ├── module.hcl (inherited)
   #│           │   │       │   ├── terraform.tfvars
   #│           │   │       │   └── terragrunt.hcl
+  #│           │   │       │   └── providers.hcl
   #│           │   │       ├── region.hcl (inherited)
   #│           │   │       └── region.tfvars
   #│           │   ├── stack.hcl (inherited)
@@ -44,6 +45,7 @@ locals {
   #│           └── terragrunt.hcl
   #
   # ---------------------------------------------------------------------------------------------------------------------
+  providers_cfg   = read_terragrunt_config("${get_terragrunt_dir()}/providers.hcl")
   module_cfg      = read_terragrunt_config("${get_terragrunt_dir()}/module.hcl")
   common_cfg      = read_terragrunt_config(find_in_parent_folders("common.hcl"))
   stack_cfg       = read_terragrunt_config(find_in_parent_folders("stack.hcl"))
@@ -51,11 +53,11 @@ locals {
   region_cfg      = read_terragrunt_config(find_in_parent_folders("region.hcl"))
 
   # ---------------------------------------------------------------------------------------------------------------------
-  # PROVIDER CONFIGURATION
+  # PROVIDER GLOBAL CONFIGURATION
   # Centralizes provider configuration to ensure consistent provider behavior across all modules. This configuration
   # is critical for managing provider-specific settings and credentials in a secure and reusable manner.
   # ---------------------------------------------------------------------------------------------------------------------
-  providers_cfg = read_terragrunt_config(find_in_parent_folders("../../../_providers/config.hcl"))
+  providers_globals_cfg = read_terragrunt_config(find_in_parent_folders("../../../_providers/config.hcl"))
 
   # ---------------------------------------------------------------------------------------------------------------------
   # ENVIRONMENT AND REGION CONFIGURATION
@@ -89,7 +91,7 @@ locals {
   tfstate_filename     = local.remote_state_cfg.tfstate_config.base_name
   backend_lock_table   = local.remote_state_cfg.aws_config.lock_table
   backend_state_bucket = local.remote_state_cfg.aws_config.state_bucket
-  backend_region       = local.remote_state_cfg.aws_config.region
+  backend_region = local.remote_state_cfg.aws_config.region
 
   # Composes a structured key path for remote state files, aligning with organizational standards for resource naming.
   remote_state_key_path = join("/", [
@@ -174,7 +176,7 @@ generate "terraform_version" {
   if_exists         = "overwrite"
   disable_signature = true
 
-  contents = <<-EOF
+  contents = <<EOF
     ${local.tf_version_cfg.locals.terraform_version}
   EOF
 }
@@ -184,7 +186,7 @@ generate "terragrunt_version" {
   if_exists         = "overwrite"
   disable_signature = true
 
-  contents = <<-EOF
+  contents = <<EOF
     ${local.tf_version_cfg.locals.terragrunt_version}
   EOF
 }
@@ -192,7 +194,7 @@ generate "terragrunt_version" {
 generate "providers" {
   path      = "providers.tf"
   if_exists = "overwrite_terragrunt"
-  contents  = join("\n", local.providers_cfg.locals.providers_content)
+  contents  = join("\n", concat(local.providers_cfg.locals.providers_content, local.providers_globals_cfg.locals.providers_content))
 }
 
 remote_state {

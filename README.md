@@ -23,7 +23,7 @@ This repository embodies a structured approach to organizing Terraform code with
 │       │   │   ├── cloudflare_dns_zone.hcl
 │       │   │   └── random_string.hcl
 │       │   ├── _providers
-│       │   │   └── config.hcl
+│       │   │   └── config.hcl # Global provider's configuration
 │       │   ├── common.hcl
 │       │   ├── common.tfvars
 │       │   ├── stack-example
@@ -34,6 +34,7 @@ This repository embodies a structured approach to organizing Terraform code with
 │       │   │   │       ├── cloudflare-dns-zone
 │       │   │   │       │   ├── .terraform.lock.hcl
 │       │   │   │       │   ├── module.hcl
+│       │   │   │       │   ├── providers.hcl # Local provider's configuration for this specific module
 │       │   │   │       │   ├── terraform.tfvars
 │       │   │   │       │   └── terragrunt.hcl
 │       │   │   │       ├── random-string
@@ -41,6 +42,7 @@ This repository embodies a structured approach to organizing Terraform code with
 │       │   │   │       │   ├── .terraform.lock.hcl
 │       │   │   │       │   ├── .terragrunt-version
 │       │   │   │       │   ├── module.hcl
+│       │   │   │       │   ├── providers.hcl # Local provider's configuration for this specific module
 │       │   │   │       │   ├── terraform.tfvars
 │       │   │   │       │   └── terragrunt.hcl
 │       │   │   │       ├── region.hcl

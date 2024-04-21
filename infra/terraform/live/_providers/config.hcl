@@ -22,7 +22,7 @@ locals {
     # Example for Cloudflare, uncomment and modify as necessary
     # cloudflare = {
     #   enabled = get_env("TG_PROVIDER_CLOUDFLARE_ENABLED", true)
-    #   content = <<EOF
+    #   content = <<-EOF
     # provider "cloudflare" {
     #   email   = "${get_env("CLOUDFLARE_EMAIL", "email@example.com")}"
     #   api_key = "${get_env("CLOUDFLARE_API_KEY", "your_cloudflare_api_key")}"
@@ -32,7 +32,7 @@ locals {
     # Example for AWS, with conditional enablement
     # aws = {
     #   enabled = get_env("TG_PROVIDER_AWS_ENABLED", false)
-    #   content = <<EOF
+    #   content = <<-EOF
     # provider "aws" {
     #   region = "us-west-2"
     #   access_key = "${get_env("AWS_ACCESS_KEY")}"

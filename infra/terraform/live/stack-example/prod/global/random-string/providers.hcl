@@ -20,7 +20,7 @@ locals {
   providers = {
     random = {
       enabled = get_env("TG_PROVIDER_RANDOM_ENABLED", true)
-      content = <<EOF
+      content = <<-EOF
 provider "random" {
   # The random provider does not require authentication, but this block is included
   # for consistency and to allow future configuration if necessary.

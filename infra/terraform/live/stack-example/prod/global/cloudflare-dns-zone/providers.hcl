@@ -23,8 +23,8 @@ locals {
       enabled = get_env("TG_PROVIDER_CLOUDFLARE_ENABLED", true)
       content = <<-EOF
 provider "cloudflare" {
-  email   = "${get_env("CLOUDFLARE_EMAIL", "atorres.ruiz@hotmail.com")}"
-  api_key = "${get_env("CLOUDFLARE_API_KEY", "0f2d823b38e5155df231b9cc5bedab1c8f3b8")}"
+  email   = "${get_env("CLOUDFLARE_EMAIL", "my@email.com")}"
+  api_key = "${get_env("CLOUDFLARE_API_KEY", "0f2dsssda8f3b8")}"
 }
 EOF
     },

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.5](https://github.com/Excoriate/terragrunt-ref-arch/compare/v0.0.4...v0.0.5) (2024-06-07)
+
+
+### Other
+
+* change api key on stack example ([63c489f](https://github.com/Excoriate/terragrunt-ref-arch/commit/63c489f23c0779b54de346cdc75493bc386204dd))
+
+
+### Refactoring
+
+* add disabled optimization for remote state bucket ([e67158e](https://github.com/Excoriate/terragrunt-ref-arch/commit/e67158ef38ca252054c3aec7a9affc7cb07efd73))
+* add more updatesd terraform and terragrunt versions ([2d3e312](https://github.com/Excoriate/terragrunt-ref-arch/commit/2d3e3120291a1368ba10cf138c9a0a20707dc86c))
+
 ## [0.0.4](https://github.com/Excoriate/terragrunt-ref-arch/compare/v0.0.3...v0.0.4) (2024-04-14)
 
 

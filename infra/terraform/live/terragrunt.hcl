@@ -94,16 +94,16 @@ locals {
   backend_region = local.remote_state_cfg.aws_config.region
 
   # Composes a structured key path for remote state files, aligning with organizational standards for resource naming.
+  stack_name_with_prefix = can(regex("stack", local.stack_name)) ? local.stack_name : format("stack-%s", local.stack_name)
   remote_state_key_path = join("/", [
     local.owner,
-    format("stack-%s", local.stack_name),
+    local.stack_name_with_prefix,
     local.layer,
     local.module_name,
     local.environment,
     local.region,
     local.tfstate_filename,
   ])
-
   # ---------------------------------------------------------------------------------------------------------------------
   # EXPOSED CONFIGURATION
   # These parameters are made visible for debugging and operational transparency, facilitating easier troubleshooting

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/Excoriate/terragrunt-ref-arch/compare/v0.0.5...v0.0.6) (2024-06-07)
+
+
+### Refactoring
+
+* enhance the stack part of the remote state, when the 'stack' word is already present ([704802f](https://github.com/Excoriate/terragrunt-ref-arch/commit/704802f3912f31e3db27a2e072bafde898f22537))
+
 ## [0.0.5](https://github.com/Excoriate/terragrunt-ref-arch/compare/v0.0.4...v0.0.5) (2024-06-07)
 
 

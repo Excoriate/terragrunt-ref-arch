@@ -19,6 +19,6 @@ locals {
   # issues, streamlines CI/CD pipelines, and ensures that infrastructure deployments are executed against tested
   # and approved versions of Terraform and Terragrunt.
   # ---------------------------------------------------------------------------------------------------------------------
-  terraform_version  = get_env("TG_CONFIG_TERRAFORM_VERSION", "1.6.1")  // Default Terraform version: 1.6.1
-  terragrunt_version = get_env("TG_CONFIG_TERRAGRUNT_VERSION", "0.42.8") // Default Terragrunt version: 0.42.8
+  terraform_version  = get_env("TG_CONFIG_TERRAFORM_VERSION", "1.7.1")  // Default Terraform version: 1.6.1
+  terragrunt_version = get_env("TG_CONFIG_TERRAGRUNT_VERSION", "0.58.2") // Default Terragrunt version: 0.42.8
 }

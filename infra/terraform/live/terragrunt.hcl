@@ -198,6 +198,7 @@ generate "providers" {
 }
 
 remote_state {
+  disable_dependency_optimization = true
   backend  = lookup(local.remote_state_cfg.terragrunt_config, "backend", "s3")
   generate = lookup(local.remote_state_cfg.terragrunt_config, "generate", {
     path      = "backend.tf"
